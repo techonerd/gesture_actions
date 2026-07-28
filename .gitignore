@@ -1,0 +1,29 @@
+# Built artifacts
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for the ART/JVM
+*.class
+
+# Log files
+*.log
+
+# Android Studio local configuration
+.navigation/
+.gradle/
+local.properties
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+*.iml
+.DS_Store
+
+# Gradle directories and files
+build/
+app/build/
+
+# Local/user specific config
+.idea/shelf/
