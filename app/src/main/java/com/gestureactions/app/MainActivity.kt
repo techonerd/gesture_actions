@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.*
+import com.gestureactions.app.core.service.GestureForegroundService
 import com.gestureactions.app.core.settings.SettingsManager
 import com.gestureactions.app.ui.screens.HomeScreen
 import com.gestureactions.app.ui.theme.AppTheme
@@ -15,6 +16,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // The foreground service is the only gesture daemon, so make sure it runs whenever the engine is on
+        if (SettingsManager(this).isDaemonActive) {
+            GestureForegroundService.startService(this)
+        }
 
         setContent {
             val context = androidx.compose.ui.platform.LocalContext.current

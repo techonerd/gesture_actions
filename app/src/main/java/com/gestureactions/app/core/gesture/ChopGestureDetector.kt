@@ -38,7 +38,8 @@ class ChopGestureDetector(
         val z = event.values[2]
 
         val mag = sqrt(x * x + y * y + z * z)
-        val now = System.currentTimeMillis()
+        // Sensor time, not delivery time: batched events arrive together but keep their real timestamps
+        val now = event.timestamp / 1_000_000L
 
         if (mag > thresholdJerk) {
             // Cooldown of 120ms to prevent double-counting samples from the same swing/peak

@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">GestureActions</string>
-    <string name="accessibility_service_label">GestureActions Daemon (Moto Gestures)</string>
-    <string name="accessibility_service_description">Provides 100% Moto-level Chop Chop flashlight and Double Twist camera gestures for Samsung and Android devices.</string>
 </resources>

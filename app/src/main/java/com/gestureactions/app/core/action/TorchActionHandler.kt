@@ -18,6 +18,8 @@ class TorchActionHandler : ActionHandler {
     companion object {
         @Volatile
         private var isTorchOn = false
+        @Volatile
+        private var isTorchAvailable = true
         private var isCallbackRegistered = false
         private var activeCameraId: String? = null
 
@@ -33,7 +35,17 @@ class TorchActionHandler : ActionHandler {
                 cameraManager.registerTorchCallback(object : CameraManager.TorchCallback() {
                     override fun onTorchModeChanged(cameraId: String, enabled: Boolean) {
                         android.util.Log.d("TorchActionHandler", "onTorchModeChanged: id=$cameraId enabled=$enabled")
+                        // Only track the flash we toggle; a front flash reporting "off" must not overwrite it
+                        if (cameraId != activeCameraId) return
+                        isTorchAvailable = true
                         isTorchOn = enabled
+                    }
+
+                    override fun onTorchModeUnavailable(cameraId: String) {
+                        // Camera is in use by another app (e.g. camera app open); torch cannot be toggled
+                        if (cameraId != activeCameraId) return
+                        isTorchAvailable = false
+                        isTorchOn = false
                     }
                 }, null)
                 isCallbackRegistered = true
@@ -49,6 +61,7 @@ class TorchActionHandler : ActionHandler {
         val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as? CameraManager ?: return
         
         registerTorchCallback(context)
+        if (!isTorchAvailable) return
 
         try {
             val cameraId = activeCameraId ?: cameraManager.cameraIdList.firstOrNull { id ->

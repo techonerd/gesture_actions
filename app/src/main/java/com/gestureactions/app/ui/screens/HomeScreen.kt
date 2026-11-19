@@ -546,8 +546,8 @@ fun MainScreenContent(
     var isIgnoringBatteryOptimizations by remember {
         mutableStateOf(pm.isIgnoringBatteryOptimizations(context.packageName))
     }
-    var isAccessibilityEnabled by remember {
-        mutableStateOf(isAccessibilityServiceEnabled(context))
+    var canDrawOverlays by remember {
+        mutableStateOf(Settings.canDrawOverlays(context))
     }
 
     // Dynamic S23 setting values cached locally
@@ -577,7 +577,7 @@ fun MainScreenContent(
     LaunchedEffect(Unit) {
         while (true) {
             isIgnoringBatteryOptimizations = pm.isIgnoringBatteryOptimizations(context.packageName)
-            isAccessibilityEnabled = isAccessibilityServiceEnabled(context)
+            canDrawOverlays = Settings.canDrawOverlays(context)
             if (activeStyle == OEMThemeStyle.ONE_UI) {
                 wakeGesture = samsungManager.getSetting(SamsungGesturesManager.WAKE_GESTURE, false)
                 doubleTapOn = samsungManager.getSetting(SamsungGesturesManager.DOUBLE_TAP_ON, false)
@@ -715,8 +715,8 @@ fun MainScreenContent(
                 modifier = Modifier.padding(bottom = 4.dp)
             )
 
-            // Accessibility Service Warning Card
-            if (!isAccessibilityEnabled) {
+            // Overlay permission card: lets Double Twist open the camera while the app is in the background
+            if (isTwistEnabled && !canDrawOverlays) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = getCardShape(activeStyle),
@@ -730,16 +730,16 @@ fun MainScreenContent(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
-                            Icon(Icons.Default.Accessibility, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                            Icon(Icons.Default.Layers, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                             Text(
-                                text = "Accessibility Service Required",
+                                text = "Allow Display Over Other Apps",
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 15.sp
                             )
                         }
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "To trigger gestures when the screen is completely off, when locked, or when the app is in the background, please enable the Accessibility Service.",
+                            text = "Android only lets apps open the camera from the background with this permission. Needed for Double Twist to work when the app is closed.",
                             fontSize = 12.sp,
                             lineHeight = 16.sp
                         )
@@ -747,17 +747,19 @@ fun MainScreenContent(
                         Button(
                             onClick = {
                                 try {
-                                    val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+                                    val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION).apply {
+                                        data = Uri.parse("package:${context.packageName}")
+                                    }
                                     context.startActivity(intent)
                                 } catch (e: Exception) {
-                                    Toast.makeText(context, "Could not open accessibility settings", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context, "Could not open overlay settings", Toast.LENGTH_SHORT).show()
                                 }
                             },
                             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 6.dp),
                             modifier = Modifier.align(Alignment.End)
                         ) {
-                            Text("Enable Service", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text("Allow", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
@@ -1087,23 +1089,6 @@ fun getCardShape(style: OEMThemeStyle) = when (style) {
     OEMThemeStyle.HYPER_OS -> RoundedCornerShape(18.dp)
     OEMThemeStyle.MOTO -> RoundedCornerShape(12.dp)
     OEMThemeStyle.MATERIAL_YOU -> RoundedCornerShape(16.dp)
-}
-
-fun isAccessibilityServiceEnabled(context: Context): Boolean {
-    val serviceName = context.packageName + "/" + com.gestureactions.app.core.service.GestureAccessibilityService::class.java.canonicalName
-    val enabledServices = Settings.Secure.getString(
-        context.contentResolver,
-        Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-    ) ?: return false
-    val splitter = android.text.TextUtils.SimpleStringSplitter(':')
-    splitter.setString(enabledServices)
-    while (splitter.hasNext()) {
-        val enabledService = splitter.next()
-        if (enabledService.equals(serviceName, ignoreCase = true)) {
-            return true
-        }
-    }
-    return false
 }
 
 // -----------------------------------------------------------------------------

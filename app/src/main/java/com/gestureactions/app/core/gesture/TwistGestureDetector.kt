@@ -39,7 +39,8 @@ class TwistGestureDetector(
         if (!isEnabled || event == null || event.sensor.type != Sensor.TYPE_GYROSCOPE) return
 
         val wy = event.values[1] // Y-axis (longitudinal axis) angular velocity
-        val now = System.currentTimeMillis()
+        // Sensor time, not delivery time: batched events arrive together but keep their real timestamps
+        val now = event.timestamp / 1_000_000L
 
         if (waitingForCoolDown) {
             if (Math.abs(wy) < coolDownThreshold) {

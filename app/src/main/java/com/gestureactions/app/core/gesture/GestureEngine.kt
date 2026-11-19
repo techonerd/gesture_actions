@@ -48,7 +48,9 @@ class GestureEngine(context: Context) {
     }
 
     private fun bindSensorListener(detector: GestureDetector) {
-        val sensor = sensorManager.getDefaultSensor(detector.targetSensorType)
+        // Prefer the wake-up variant: non-wake-up sensors stop delivering events once the CPU sleeps (screen off)
+        val sensor = sensorManager.getDefaultSensor(detector.targetSensorType, true)
+            ?: sensorManager.getDefaultSensor(detector.targetSensorType)
         if (sensor != null) {
             // SENSOR_DELAY_GAME for high accuracy; maxReportLatencyUs for hardware batching
             sensorManager.registerListener(
