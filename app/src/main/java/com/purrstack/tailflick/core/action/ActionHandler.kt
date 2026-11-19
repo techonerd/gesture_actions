@@ -1,4 +1,4 @@
-package com.gestureactions.app.core.action
+package com.purrstack.tailflick.core.action
 
 import android.content.Context
 

@@ -1,4 +1,4 @@
-package com.gestureactions.app.core.action
+package com.purrstack.tailflick.core.action
 
 import android.app.KeyguardManager
 import android.content.Context
@@ -9,7 +9,7 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.provider.MediaStore
-import com.gestureactions.app.core.settings.SettingsManager
+import com.purrstack.tailflick.core.settings.SettingsManager
 import java.util.concurrent.ConcurrentHashMap
 
 /**

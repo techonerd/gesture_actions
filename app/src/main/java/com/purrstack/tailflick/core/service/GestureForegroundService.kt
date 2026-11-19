@@ -1,4 +1,4 @@
-package com.gestureactions.app.core.service
+package com.purrstack.tailflick.core.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,14 +9,14 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.gestureactions.app.R
-import com.gestureactions.app.core.action.ActionRegistry
-import com.gestureactions.app.core.action.CameraActionHandler
-import com.gestureactions.app.core.action.TorchActionHandler
-import com.gestureactions.app.core.gesture.ChopGestureDetector
-import com.gestureactions.app.core.gesture.GestureEngine
-import com.gestureactions.app.core.gesture.TwistGestureDetector
-import com.gestureactions.app.core.settings.SettingsManager
+import com.purrstack.tailflick.R
+import com.purrstack.tailflick.core.action.ActionRegistry
+import com.purrstack.tailflick.core.action.CameraActionHandler
+import com.purrstack.tailflick.core.action.TorchActionHandler
+import com.purrstack.tailflick.core.gesture.ChopGestureDetector
+import com.purrstack.tailflick.core.gesture.GestureEngine
+import com.purrstack.tailflick.core.gesture.TwistGestureDetector
+import com.purrstack.tailflick.core.settings.SettingsManager
 
 /**
  * Foreground Service Daemon alternative with customizable notification persistence.
@@ -123,7 +123,7 @@ class GestureForegroundService : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "GestureActions Status Daemon",
+                "Tailflick gesture detection",
                 NotificationManager.IMPORTANCE_LOW
             ).apply {
                 description = "Monitors chop-chop and twist gestures in background"
@@ -135,7 +135,7 @@ class GestureForegroundService : Service() {
     }
 
     private fun buildNotification() = NotificationCompat.Builder(this, CHANNEL_ID)
-        .setContentTitle("GestureActions Daemon Active")
+        .setContentTitle("Tailflick is active")
         .setContentText("Listening for Chop Chop & Double Twist gestures")
         .setSmallIcon(R.drawable.ic_launcher_foreground)
         .setOngoing(false) // Dismissable per user configuration

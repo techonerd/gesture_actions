@@ -1,4 +1,4 @@
-package com.gestureactions.app.core.gesture
+package com.purrstack.tailflick.core.gesture
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent

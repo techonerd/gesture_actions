@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.gestureactions.app"
+    namespace = "com.purrstack.tailflick"
     compileSdk {
         // Compose 1.13+ needs the 37.1+ minor SDK; targetSdk stays at the Play Store requirement
         version = release(37) { minorApiLevel = 2 }
     }
 
     defaultConfig {
-        applicationId = "com.gestureactions.app"
+        applicationId = "com.purrstack.tailflick"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

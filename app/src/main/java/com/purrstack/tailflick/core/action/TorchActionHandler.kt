@@ -1,11 +1,11 @@
-package com.gestureactions.app.core.action
+package com.purrstack.tailflick.core.action
 
 import android.content.Context
 import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
-import com.gestureactions.app.core.settings.SettingsManager
+import com.purrstack.tailflick.core.settings.SettingsManager
 
 /**
  * Toggles Phone Flashlight / Torch via CameraManager, synchronized with actual hardware state.

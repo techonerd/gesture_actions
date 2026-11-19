@@ -1,16 +1,16 @@
-package com.gestureactions.app
+package com.purrstack.tailflick
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.*
-import com.gestureactions.app.core.service.GestureForegroundService
-import com.gestureactions.app.core.settings.SettingsManager
-import com.gestureactions.app.ui.screens.HomeScreen
-import com.gestureactions.app.ui.theme.AppTheme
-import com.gestureactions.app.ui.theme.OEMThemeStyle
-import com.gestureactions.app.ui.theme.getSystemOemStyle
+import com.purrstack.tailflick.core.service.GestureForegroundService
+import com.purrstack.tailflick.core.settings.SettingsManager
+import com.purrstack.tailflick.ui.screens.HomeScreen
+import com.purrstack.tailflick.ui.theme.AppTheme
+import com.purrstack.tailflick.ui.theme.OEMThemeStyle
+import com.purrstack.tailflick.ui.theme.getSystemOemStyle
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

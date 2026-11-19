@@ -1,4 +1,4 @@
-package com.gestureactions.app.core.service
+package com.purrstack.tailflick.core.service
 
 import android.content.BroadcastReceiver
 import android.content.Context

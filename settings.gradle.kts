@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "GestureActions"
+rootProject.name = "Tailflick"
 include(":app")

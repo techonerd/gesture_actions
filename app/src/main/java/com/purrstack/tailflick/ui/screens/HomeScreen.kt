@@ -1,4 +1,4 @@
-package com.gestureactions.app.ui.screens
+package com.purrstack.tailflick.ui.screens
 
 import android.app.Activity
 import android.content.Context
@@ -44,15 +44,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.gestureactions.app.core.action.CameraActionHandler
-import com.gestureactions.app.core.action.TorchActionHandler
-import com.gestureactions.app.core.gesture.ChopGestureDetector
-import com.gestureactions.app.core.gesture.GestureEngine
-import com.gestureactions.app.core.gesture.TwistGestureDetector
-import com.gestureactions.app.core.settings.SettingsManager
-import com.gestureactions.app.core.settings.SamsungGesturesManager
-import com.gestureactions.app.ui.theme.OEMThemeStyle
-import com.gestureactions.app.ui.theme.getSystemOemStyle
+import com.purrstack.tailflick.core.action.CameraActionHandler
+import com.purrstack.tailflick.core.action.TorchActionHandler
+import com.purrstack.tailflick.core.gesture.ChopGestureDetector
+import com.purrstack.tailflick.core.gesture.GestureEngine
+import com.purrstack.tailflick.core.gesture.TwistGestureDetector
+import com.purrstack.tailflick.core.settings.SettingsManager
+import com.purrstack.tailflick.core.settings.SamsungGesturesManager
+import com.purrstack.tailflick.ui.theme.OEMThemeStyle
+import com.purrstack.tailflick.ui.theme.getSystemOemStyle
 import kotlinx.coroutines.launch
 
 sealed interface Screen {
@@ -273,9 +273,9 @@ fun HomeScreen(
                             isDaemonActive = it
                             settings.isDaemonActive = it
                             if (it) {
-                                com.gestureactions.app.core.service.GestureForegroundService.startService(context)
+                                com.purrstack.tailflick.core.service.GestureForegroundService.startService(context)
                             } else {
-                                com.gestureactions.app.core.service.GestureForegroundService.stopService(context)
+                                com.purrstack.tailflick.core.service.GestureForegroundService.stopService(context)
                             }
                         },
                         onDrawerOpen = { scope.launch { drawerState.open() } },
@@ -2664,7 +2664,7 @@ fun SupportScreen(
             }
 
             Text(
-                text = "Support GestureActions",
+                text = "Support Tailflick",
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center
@@ -2679,7 +2679,7 @@ fun SupportScreen(
             )
 
             Text(
-                text = "GestureActions is built to bring responsive karate chop flashlight & twist camera gestures to Samsung and Android devices. Your support helps maintain low-latency sensor algorithms, hardware fixes, and ad-free utility development! 🐱",
+                text = "Tailflick is built to bring responsive karate chop flashlight & twist camera gestures to Samsung and Android devices. Your support helps maintain low-latency sensor algorithms, hardware fixes, and ad-free utility development! 🐱",
                 textAlign = TextAlign.Center,
                 fontSize = 14.sp,
                 lineHeight = 20.sp,
@@ -2780,7 +2780,7 @@ fun AboutScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "GestureActions",
+                text = "Tailflick",
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp
             )
@@ -2793,7 +2793,7 @@ fun AboutScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "GestureActions is a high-performance utility that brings Moto-style Chop Chop and Quick Twist gestures to Samsung, Xiaomi, and other Android devices. Built using hardware-fused sensors and low-latency system hooks to deliver maximum reliability and minimal battery impact.",
+                text = "Tailflick is a high-performance utility that brings Moto-style Chop Chop and Quick Twist gestures to Samsung, Xiaomi, and other Android devices. Built using hardware-fused sensors and low-latency system hooks to deliver maximum reliability and minimal battery impact.",
                 textAlign = TextAlign.Center,
                 fontSize = 14.sp,
                 lineHeight = 20.sp,

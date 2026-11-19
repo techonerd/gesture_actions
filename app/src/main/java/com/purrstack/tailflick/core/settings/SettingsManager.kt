@@ -1,4 +1,4 @@
-package com.gestureactions.app.core.settings
+package com.purrstack.tailflick.core.settings
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -14,7 +14,7 @@ SDK_DIR="$SCRATCH_DIR/android-sdk"
 CMDLINE_TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip"
 
 echo "======================================================================"
-echo "⚡ GestureActions Headless APK Builder"
+echo "⚡ Tailflick Headless APK Builder"
 echo "======================================================================"
 
 # 1. Environment Exports
@@ -51,8 +51,8 @@ echo "🚀 Compiling Android Kotlin app into APK..."
 ./gradlew assembleDebug
 
 APK_SOURCE="$SCRIPT_DIR/app/build/outputs/apk/debug/app-debug.apk"
-APK_DEST_PATH="$SCRIPT_DIR/app/build/outputs/apk/debug/gesture-apk-debug.apk"
-WEB_DEST="/home/ranjeet/.gemini/antigravity-ide/scratch/gesture_actions_web/gesture-apk-debug.apk"
+APK_DEST_PATH="$SCRIPT_DIR/app/build/outputs/apk/debug/tailflick-debug.apk"
+WEB_DEST="/home/ranjeet/.gemini/antigravity-ide/scratch/gesture_actions_web/tailflick-debug.apk"
 
 if [ -f "$APK_SOURCE" ]; then
     cp "$APK_SOURCE" "$APK_DEST_PATH"
@@ -60,7 +60,7 @@ if [ -f "$APK_SOURCE" ]; then
     echo "======================================================================"
     echo "🎉 SUCCESS! Your APK has been compiled successfully:"
     echo "   📍 Direct File Path: $APK_DEST_PATH"
-    echo "   🌐 Web Server Link: http://localhost:8080/gesture-apk-debug.apk"
+    echo "   🌐 Web Server Link: http://localhost:8080/tailflick-debug.apk"
     echo "======================================================================"
 else
     echo "❌ APK build failed. Check error logs."

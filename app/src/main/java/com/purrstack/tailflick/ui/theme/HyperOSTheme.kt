@@ -1,4 +1,4 @@
-package com.gestureactions.app.ui.theme
+package com.purrstack.tailflick.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.darkColorScheme

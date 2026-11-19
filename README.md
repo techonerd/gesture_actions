@@ -1,9 +1,7 @@
-# Gesture Actions
+# Tailflick
 
 Motion gestures for any Android phone, inspired by the quick gestures found on Motorola phones.
 Chop twice to toggle the flashlight, twist twice to open the camera — no need to unlock the phone or find a button.
-
-> Working name. The final app name may change before the Play Store release.
 
 ## Gestures
 
@@ -64,7 +62,9 @@ A foreground service (with a small status notification) keeps detection running 
 
 The app works fully offline. No data leaves your phone.
 
-> The current build still declares a few extra permissions (internet, camera, write settings, disable keyguard) that are being removed before the Play Store release. The app does not use an accessibility service.
+The app does not use an accessibility service, the internet, or the camera permission.
+
+> The build also declares *modify system settings*, used only by the optional Samsung gesture toggles. It may be removed before the Play Store release.
 
 ## Build
 
