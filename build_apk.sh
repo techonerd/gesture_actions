@@ -41,14 +41,14 @@ if [ ! -d "$SDK_DIR/cmdline-tools/latest" ]; then
 fi
 
 # 3. Accept Licenses & Install Required Build Tools
-echo "⚙️  Checking Android SDK packages (API 34)..."
+echo "⚙️  Checking Android SDK packages (API 37.2)..."
 yes | sdkmanager --licenses > /dev/null 2>&1 || true
-sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0" > /dev/null 2>&1 || true
+sdkmanager "platform-tools" "platforms;android-37.2" "build-tools;36.0.0" > /dev/null 2>&1 || true
 
 # 4. Build Debug APK
 cd "$SCRIPT_DIR"
 echo "🚀 Compiling Android Kotlin app into APK..."
-gradle assembleDebug
+./gradlew assembleDebug
 
 APK_SOURCE="$SCRIPT_DIR/app/build/outputs/apk/debug/app-debug.apk"
 APK_DEST_PATH="$SCRIPT_DIR/app/build/outputs/apk/debug/gesture-apk-debug.apk"
