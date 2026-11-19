@@ -2,7 +2,6 @@ package com.purrstack.tailflick.core.action
 
 import android.content.Context
 import android.hardware.camera2.CameraManager
-import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import com.purrstack.tailflick.core.settings.SettingsManager
@@ -84,14 +83,9 @@ class TorchActionHandler : ActionHandler {
     private fun triggerHapticFeedback(context: Context) {
         val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
         if (vibrator != null && vibrator.hasVibrator()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val timings = longArrayOf(0, 30, 50, 30)
-                val amplitudes = intArrayOf(0, VibrationEffect.DEFAULT_AMPLITUDE, 0, VibrationEffect.DEFAULT_AMPLITUDE)
-                vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1))
-            } else {
-                @Suppress("DEPRECATION")
-                vibrator.vibrate(longArrayOf(0, 30, 50, 30), -1)
-            }
+            val timings = longArrayOf(0, 30, 50, 30)
+            val amplitudes = intArrayOf(0, VibrationEffect.DEFAULT_AMPLITUDE, 0, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1))
         }
     }
 }

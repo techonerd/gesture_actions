@@ -6,7 +6,6 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.purrstack.tailflick.R
@@ -52,11 +51,7 @@ class GestureForegroundService : Service() {
 
         fun startService(context: Context) {
             val intent = Intent(context, GestureForegroundService::class.java)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                context.startForegroundService(intent)
-            } else {
-                context.startService(intent)
-            }
+            context.startForegroundService(intent)
         }
 
         fun stopService(context: Context) {
@@ -120,18 +115,16 @@ class GestureForegroundService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                "Tailflick gesture detection",
-                NotificationManager.IMPORTANCE_LOW
-            ).apply {
-                description = "Monitors chop-chop and twist gestures in background"
-                setShowBadge(false)
-            }
-            val manager = getSystemService(NotificationManager::class.java)
-            manager?.createNotificationChannel(channel)
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            "Tailflick gesture detection",
+            NotificationManager.IMPORTANCE_LOW
+        ).apply {
+            description = "Monitors chop-chop and twist gestures in background"
+            setShowBadge(false)
         }
+        val manager = getSystemService(NotificationManager::class.java)
+        manager?.createNotificationChannel(channel)
     }
 
     private fun buildNotification() = NotificationCompat.Builder(this, CHANNEL_ID)

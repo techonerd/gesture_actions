@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import android.os.Build
 import android.os.PowerManager
 import android.os.VibrationEffect
 import android.provider.Settings
@@ -2209,12 +2208,7 @@ fun TryItScreen(
                 isSuccess = true
                 val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? android.os.Vibrator
                 if (vibrator != null && vibrator.hasVibrator()) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vibrator.vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE))
-                    } else {
-                        @Suppress("DEPRECATION")
-                        vibrator.vibrate(150)
-                    }
+                    vibrator.vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE))
                 }
             }
         } else {
@@ -2222,12 +2216,7 @@ fun TryItScreen(
                 isSuccess = true
                 val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? android.os.Vibrator
                 if (vibrator != null && vibrator.hasVibrator()) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vibrator.vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE))
-                    } else {
-                        @Suppress("DEPRECATION")
-                        vibrator.vibrate(150)
-                    }
+                    vibrator.vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE))
                 }
             }
         }

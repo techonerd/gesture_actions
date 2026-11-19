@@ -1,7 +1,6 @@
 package com.purrstack.tailflick.core.settings
 
 import android.content.Context
-import android.os.Build
 import android.provider.Settings
 
 class SamsungGesturesManager(private val context: Context) {
@@ -17,13 +16,7 @@ class SamsungGesturesManager(private val context: Context) {
         const val SMART_STAY = "smart_stay"
     }
 
-    fun hasWriteSettingsPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Settings.System.canWrite(context)
-        } else {
-            true
-        }
-    }
+    fun hasWriteSettingsPermission(): Boolean = Settings.System.canWrite(context)
 
     fun getSetting(key: String, default: Boolean = true): Boolean {
         return try {
